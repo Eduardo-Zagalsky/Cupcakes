@@ -29,18 +29,17 @@ def get_cupcake(cupcake_id):
 
 @app.route("/api/cupcakes", methods=["POST"])
 def post_cupcakes():
-    cupcake = Cupcake.query.all()
+    cupcake = Cupcake(flavor=request.json['flavor'], size=request.json['size'],
+                      rating=request.json['rating'], img=request.json['img'])
 
-    flavor = request.json["flavor"]
-    size = request.json["size"]
-    rating = request.json["rating"]
-    image = request.json["image"]
-
-    new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating, image=image)
-
-    db.session.add(new_cupcake)
+    db.session.add(cupcake)
     db.session.commit()
 
-    serialized = cupcake.serialize(new_cupcake)
+    serialized = cupcake.serialize()
 
-    return jsonify(cupcake=serialized)
+    return (jsonify(cupcake=serialized), 201)
+
+
+@app.route("/api/cupcakes/<int:cupcake_id>")
+def patch_cupcake(cupcake_id):
+    return
