@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Cupcake
 
@@ -9,10 +9,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcake'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "secret"
-# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 connect_db(app)
+
+
+@app.route("/")
+def display_cupcakes():
+    return render_template("display.html")
 
 
 @app.route("/api/cupcakes")
