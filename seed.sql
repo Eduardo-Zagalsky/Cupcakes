@@ -8,7 +8,7 @@ CREATE TABLE cupcakes (
     flavor text NOT NULL,
     size text NOT NULL,
     rating float NOT NULL,
-    img text NOT NULL DEFAULT 'https://tinyurl.com/demo-cupcake'
+    img text DEFAULT 'https://tinyurl.com/demo-cupcake'
 );
 
 INSERT INTO cupcakes (flavor, size, rating, img)
