@@ -34,8 +34,8 @@ def get_cupcake(cupcake_id):
 
 @app.route("/api/cupcakes", methods=["POST"])
 def post_cupcakes():
-    cupcake = Cupcake(flavor=request.json['flavor'], size=request.json['size'],
-                      rating=request.json['rating'], img=request.json['img'])
+    cupcake = Cupcake(flavor=request.form['flavor'], size=request.form['size'],
+                      rating=request.form['rating'], img=request.form['img'])
 
     db.session.add(cupcake)
     db.session.commit()
